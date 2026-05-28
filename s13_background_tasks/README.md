@@ -1,12 +1,11 @@
 # s13: Background Tasks — 慢操作放后台
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s11 → s12 → `s13` → [s14](../s14_cron_scheduler/) → s15 → ... → s20
 
 > *"慢操作丢后台, agent 继续处理"* — 后台线程跑命令, 完成后注入通知。
 >
-> **Harness 层**: 后台 — 异步执行, 不阻塞主循环。
+> **Harness 层**: 后台任务（background task）— 异步执行，不阻塞主循环。
 
 ---
 
@@ -24,7 +23,7 @@ Agent 的 bash 工具也一样。`pip install torch` 要 10 分钟，`npm run bu
 
 ![Background Tasks Overview](images/background-tasks-overview.svg)
 
-教学代码沿用 S12 的简化任务系统和 prompt 组装；为了聚焦后台任务，省略完整错误恢复、记忆和技能系统。唯一的变动：慢操作扔到后台线程，Agent 继续跑循环，后台完成后把通知注入到对话里。
+教学代码沿用 S12 的简化任务系统和 prompt 组装；为了聚焦后台任务，省略完整错误恢复、记忆和技能系统。唯一的变动：慢操作扔到后台线程，Agent 继续跑循环（loop），后台完成后把通知注入到对话里。
 
 同步 vs 后台：
 

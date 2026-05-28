@@ -1,6 +1,5 @@
 # s20: Comprehensive Agent — 全部机制，归到一个循环
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s18 → s19 → `s20`
 
@@ -16,15 +15,15 @@ s01 → ... → s18 → s19 → `s20`
 
 一个能长期工作的 coding agent 需要同时拥有：
 
-- 工具分发和权限边界
-- hooks 扩展点
+- 工具分发和权限（permission）边界
+- 钩子（hook）扩展点
 - todo 计划和任务图
-- 技能、记忆、系统 prompt 组装
-- 压缩和错误恢复
-- 后台任务和 cron 调度
-- 团队、协议、自治认领
-- worktree 隔离
-- MCP 外部工具接入
+- 技能（skill）、记忆（memory）、系统提示词（system prompt）组装
+- 上下文压缩（context compaction）和错误恢复（error recovery）
+- 后台任务（background task）和 cron 调度（scheduler）
+- 团队、协议（protocol）、自治（autonomous）认领
+- 工作树（worktree）隔离
+- MCP 插件（plugin）外部工具接入
 
 难点不是把功能堆起来，而是看清楚它们都挂在循环的哪个位置。S20 就是终点章：把所有组件归位。
 
@@ -52,7 +51,7 @@ S20 不是再发明一个新机制，而是把前面的教学组件合成一个�
           → 下一轮
 ```
 
-循环本身仍然是同一个结构：调用模型，检查响应里是否出现 `tool_use` block，执行工具，把结果追加回 `messages`。CC 源码里也不直接信任 `stop_reason == "tool_use"`，而是以实际出现的 tool_use block 作为是否继续工具轮的信号。变化的是循环周围的 harness 变完整了。
+循环（loop）本身仍然是同一个结构：调用模型，检查响应里是否出现 `tool_use` block，执行工具，把结果追加回 `messages`。CC 源码里也不直接信任 `stop_reason == "tool_use"`，而是以实际出现的 tool_use block 作为是否继续工具轮的信号。变化的是循环周围的 harness 变完整了。
 
 ---
 

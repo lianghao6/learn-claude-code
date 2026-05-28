@@ -1,6 +1,5 @@
 # s12: Task System — 目标太大，拆成小任务
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s10 → s11 → `s12` → [s13](../s13_background_tasks/) → s14 → ... → s20
 
@@ -16,7 +15,7 @@ Agent 接到一个项目：搭数据库、写 API、加测试。它用 s05 的 T
 
 盖房子不能先盖屋顶再打地基。任务之间有先后。任务依赖应该形成有向无环图（DAG）；教学版只演示 `blockedBy` 检查，没有实现环检测。
 
-s05 的 TodoWrite 是当前任务的执行清单，保存在会话内存中。这里需要的是**任务系统**：每个任务是一个 JSON 文件，任务之间有 `blockedBy` 依赖，跨会话持久化在磁盘上。
+s05 的 TodoWrite 是当前任务的执行清单，保存在会话内存中。这里需要的是**任务系统（task system）**：每个任务是一个 JSON 文件，任务之间有 `blockedBy` 依赖，跨会话持久化在磁盘上。
 
 ---
 

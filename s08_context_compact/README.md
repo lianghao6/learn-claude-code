@@ -1,6 +1,5 @@
 # s08: Context Compact — 上下文总会满，要有办法腾地方
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → s02 → s03 → s04 → s05 → s06 → s07 → `s08` → [s09](../s09_memory/) → s10 → ... → s20
 > *"上下文总会满, 要有办法腾地方"* — 四层压缩策略, 便宜的先跑贵的后跑。
@@ -212,7 +211,7 @@ python s08_context_compact/code.py
 
 ## 接下来
 
-上下文压缩让 Agent 能跑很久不会崩。但每次压缩后，用户之前告诉它的偏好、约束也跟着丢了。能不能让 Agent 有选择地记住重要的事？
+上下文压缩（context compaction）让 Agent 能跑很久不会崩。但每次压缩后，用户之前告诉它的偏好、约束也跟着丢了。能不能让 Agent 有选择地记住重要的事？
 
 s09 Memory → 三个子系统：选择记什么、提取关键信息、整理巩固。跨压缩、跨会话。
 

@@ -1,12 +1,11 @@
 # s06: Subagent — 大任务拆小，每个拿到的都是干净上下文
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → s02 → s03 → s04 → s05 → `s06` → [s07](../s07_skill_loading/) → s08 → ... → s20
 
 > *"大任务拆小, 每个小任务干净的上下文"* — Subagent 用独立 messages[], 不污染主对话。
 >
-> **Harness 层**: 子 Agent — 上下文隔离, 注意力不漂移。
+> **Harness 层**: 子 Agent（subagent）— 上下文隔离，注意力不漂移。
 
 ---
 
@@ -24,7 +23,7 @@ Agent 在修一个 bug。它读了 30 个文件来追踪调用链，中间聊了
 
 ![Subagent Overview](images/subagent-overview.svg)
 
-保留上一章的最小 hook 结构和 `todo_write` 工具，本章重点转向新增的 `task` 工具。调用它时，spawn 一个子 Agent，拥有全新的 `messages[]`，跑自己的循环，结束后只把摘要文本回传给主 Agent。对话上下文被丢弃，但文件系统的副作用（写文件、改文件、跑命令）保留在工作目录中。
+保留上一章的最小 hook 结构和 `todo_write` 工具，本章重点转向新增的 `task` 工具。调用它时，spawn 一个子 Agent，拥有全新的 `messages[]`，跑自己的循环（loop），结束后只把摘要文本回传给主 Agent。对话上下文被丢弃，但文件系统的副作用（写文件、改文件、跑命令）保留在工作目录中。
 
 子 Agent 的工具受限：有 bash/read/write/edit/glob，但没有 task，不能递归 spawn 新的子 Agent。子 Agent 的工具调用仍经过权限 hook，安全策略不因上下文隔离而跳过。
 

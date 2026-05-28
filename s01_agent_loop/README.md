@@ -1,6 +1,5 @@
 # s01: Agent Loop — 一个循环就够了
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 `s01` → [s02](../s02_tool_use/) → s03 → s04 → ... → s20
 > *"One loop & Bash is all you need"* — 一个工具 + 一个循环 = 一个 Agent。
@@ -25,7 +24,7 @@
 
 ![Agent Loop](images/agent-loop.svg)
 
-一个 `while True` 循环，模型调用工具就继续，不调用就停。整个过程只有两个信号：
+一个 `while True` 循环（loop），模型调用工具就继续，不调用就停。整个过程只有两个信号：
 
 | 信号 | 含义 | 循环动作 |
 |------|------|---------|
@@ -36,7 +35,7 @@
 
 ## 工作原理
 
-将这个过程翻译成代码。分步来看：
+把这个过程落实成代码，分步来看：
 
 **第 1 步**：把用户的问题作为第一条消息。
 

@@ -1,6 +1,5 @@
 # s04: Hooks — 挂在循环上，不写进循环里
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → s02 → s03 → `s04` → [s05](../s05_todo_write/) → s06 → ... → s20
 
@@ -12,9 +11,9 @@ s01 → s02 → s03 → `s04` → [s05](../s05_todo_write/) → s06 → ... → 
 
 ## 问题
 
-s03 的 Agent 有权限检查了。但每次加一个新检查，比如"记录每次 bash 调用"、"操作后自动 git add"，都要修改 `agent_loop` 函数。
+s03 的 Agent 有权限（permission）检查了。但每次加一个新检查，比如"记录每次 bash 调用"、"操作后自动 git add"，都要修改 `agent_loop` 函数。
 
-循环很快就变成了这样：
+循环（loop）很快就变成了这样：
 
 ```python
 def agent_loop(messages):

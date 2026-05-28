@@ -1,6 +1,5 @@
 # s05: TodoWrite — 没有计划的 Agent，做着做着就偏了
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → s02 → s03 → s04 → `s05` → [s06](../s06_subagent/) → s07 → ... → s20
 
@@ -26,7 +25,7 @@ Agent 开始干活，改了 3 个文件，跑了个测试，发现 2 个失败�
 
 保留上一章的最小 hook 结构，重点看新增的 `todo_write` 工具和 reminder 机制。`todo_write` 本身不做任何实际工作，不能读文件、不能跑命令，只是让 Agent 在动手之前先理清思路。
 
-dispatch 机制不变，新工具仍然走 `TOOL_HANDLERS[block.name]` 分发。但为了演示 todo reminder，循环里加了一个计数器：连续 3 轮没调 `todo_write` 就注入一条提醒。
+dispatch 机制不变，新工具仍然走 `TOOL_HANDLERS[block.name]` 分发。但为了演示 todo reminder，循环（loop）里加了一个计数器：连续 3 轮没调 `todo_write` 就注入一条提醒。
 
 ---
 

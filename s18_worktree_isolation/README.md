@@ -1,6 +1,5 @@
 # s18: Worktree Isolation — 各干各的，互不干扰
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s16 → s17 → `s18` → [s19](../s19_mcp_plugin/) → s20
 
@@ -24,7 +23,7 @@ s15-s17 解决了"谁干什么"（任务系统）和"怎么通信"（消息总�
 
 ![Worktree Overview](images/worktree-overview.svg)
 
-Git worktree 让你在同一仓库中创建多个独立的工作目录，每个有自己的分支。Alice 在 `.worktrees/auth-refactor/` 下工作，Bob 在 `.worktrees/ui-login/` 下工作——互不干扰。
+Git 工作树（worktree）让你在同一仓库中创建多个独立的工作目录，每个有自己的分支。Alice 在 `.worktrees/auth-refactor/` 下工作，Bob 在 `.worktrees/ui-login/` 下工作——互不干扰。
 
 沿用 S17 的教学版 MessageBus、协议和自治认领机制。本章新增：
 

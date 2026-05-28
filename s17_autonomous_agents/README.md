@@ -1,12 +1,11 @@
 # s17: Autonomous Agents — 自己看板，自己认领
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s15 → s16 → `s17` → [s18](../s18_worktree_isolation/) → s19 → s20
 
 > *"自己看板，自己认领"* — 空闲时轮询，有活就干。
 >
-> **Harness 层**: 自治 — 队友自组织，不依赖 Lead 分配。
+> **Harness 层**: 自治（autonomous）— 队友自组织，不依赖 Lead 分配。
 
 ---
 

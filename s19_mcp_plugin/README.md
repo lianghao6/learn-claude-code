@@ -1,12 +1,11 @@
 # s19: MCP Tools — 外接工具，标准协议
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s17 → s18 → `s19` → [s20](../s20_comprehensive/)
 
 > *"外接工具, 标准协议"* — 发现、组装、调用，Agent 不需要知道工具是谁写的。
 >
-> **Harness 层**: 插件 — 外部能力通过标准协议接入。
+> **Harness 层**: 插件（plugin/MCP）— 外部能力通过标准协议接入。
 
 ---
 

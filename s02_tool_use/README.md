@@ -1,6 +1,5 @@
 # s02: Tool Use — 多加一个工具，只加一行
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → `s02` → [s03](../s03_permission/) → s04 → ... → s20
 > *"加一个工具, 只加一个 handler"* — 循环不用动, 新工具注册进 dispatch map 就行。
@@ -21,7 +20,7 @@ s01 的 Agent 只有一个 bash 工具。读文件要 `cat`，写文件要 `echo
 
 ![Tool Dispatch](images/tool-dispatch.svg)
 
-s01 的循环完全保留（LLM 调用、stop_reason 判断、消息追加）。唯一的变动在工具执行那 1 行：`run_bash()` 替换为 `TOOL_HANDLERS[block.name]()` 查表分发。
+s01 的循环（loop）完全保留（LLM 调用、stop_reason 判断、消息追加）。唯一的变动在工具执行那 1 行：`run_bash()` 替换为 `TOOL_HANDLERS[block.name]()` 查表分发。
 
 给 Agent 加一个工具只需要做两件事：
 
@@ -102,11 +101,11 @@ for block in response.content:
 
 ---
 
-## 多个工具调用
+## 多个工具调用（tool call）
 
 模型经常一次返回多个 tool_use："读一下 a.py 和 b.py，然后列出所有 .py 文件"。
 
-教学版按 `response.content` 原始顺序逐个执行。CC 的做法更复杂：按原始顺序切成连续 batch，batch 内并发安全的工具并行执行，batch 间严格顺序（见附录）。
+教学版按 `response.content` 原始顺序逐个执行。CC 的做法更复杂：按原始顺序切成连续 batch，batch 内并发（concurrency）安全的工具并行执行，batch 间严格顺序（见附录）。
 
 ---
 

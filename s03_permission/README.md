@@ -1,11 +1,10 @@
 # s03: Permission — 执行前做权限判断
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → s02 → `s03` → [s04](../s04_hooks/) → s05 → ... → s20
 > *"工具执行前先做权限判断"* — 权限管线决定哪些操作需要审批。
 >
-> **Harness 层**: 权限 — 在工具执行前加一道门。
+> **Harness 层**: 权限（permission）— 在工具执行前加一道门。
 
 ---
 
@@ -21,7 +20,7 @@ s02 的 Agent 有 5 个工具。file tools 受 `safe_path` 保护，但 bash 不
 
 ![Permission Overview](images/permission-overview.svg)
 
-s02 的循环完全保留。唯一的变动在工具执行前插入 `check_permission()`——每个工具调用经过三道闸门，顺序固定：硬拒绝优先，软询问次之，都没命中就放行。
+s02 的循环（loop）完全保留。唯一的变动在工具执行前插入 `check_permission()`——每次工具调用（tool call）经过三道闸门，顺序固定：硬拒绝优先，软询问次之，都没命中就放行。
 
 三道闸门对应三种决策：
 

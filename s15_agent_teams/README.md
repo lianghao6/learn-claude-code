@@ -1,6 +1,5 @@
 # s15: Agent Teams — 一个搞不定，组队来
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s13 → s14 → `s15` → [s16](../s16_team_protocols/) → s17 → s18 → s19 → s20
 > *"一个搞不定, 组队来"* — 文件收件箱 + 队友线程。
@@ -97,7 +96,7 @@ def spawn_teammate_thread(name: str, role: str, prompt: str) -> str:
 
 ### Lead 的 inbox 注入
 
-Lead 在每轮主循环结束后检查收件箱。队友发来的消息注入到 history 里，让 LLM 能看到并做出反应：
+Lead 在每轮主循环（loop）结束后检查收件箱。队友发来的消息注入到 history 里，让 LLM 能看到并做出反应：
 
 ```python
 # 主循环结束后
@@ -133,7 +132,7 @@ if inbox:
 8. Lead 下次循环 → inbox 注入 history → LLM 看到 alice 和 bob 的结果
 ```
 
-两个队友并行工作。
+两个队友并发（concurrent）工作。
 
 ---
 

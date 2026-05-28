@@ -1,6 +1,5 @@
 # s16: Team Protocols — 队友之间要有约定
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → ... → s14 → s15 → `s16` → [s17](../s17_autonomous_agents/) → s18 → s19 → s20
 > *"队友之间要有约定"* — request-response 模式驱动协商。
@@ -11,7 +10,7 @@ s01 → ... → s14 → s15 → `s16` → [s17](../s17_autonomous_agents/) → s
 
 ## 问题
 
-s15 的队友能干活了，但协调是松散的：Lead 发消息，队友回复，没有结构化的协议。两个场景暴露了问题：
+s15 的队友能干活了，但协调过于松散：Lead 发消息，队友回复，缺少结构化的协议（protocol）。以下两个场景暴露了问题：
 
 **关机**：Lead 想让 Alice 关机。直接杀线程，Alice 写了一半的文件留在磁盘上。需要握手：Lead 发请求，Alice 确认收尾后关机。
 

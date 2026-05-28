@@ -1,6 +1,5 @@
 # s07: Skill Loading — 用到的时候才加载
 
-[中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
 
 s01 → s02 → s03 → s04 → s05 → s06 → `s07` → [s08](../s08_context_compact/) → s09 → ... → s20
 > *"用到时再加载, 别全塞 prompt 里"* — 通过 tool_result 注入, 不塞 system prompt。
@@ -30,7 +29,7 @@ SYSTEM = (
 
 ![Skill Overview](images/skill-overview.svg)
 
-保留上一章的最小 hook 结构、`todo_write` 和子 Agent，本章重点转向新增的 `load_skill` 工具。启动时把技能目录注入 SYSTEM prompt，运行时多注册一个工具加载完整内容，用到才花 token。
+保留上一章的最小 hook 结构、`todo_write` 和子 Agent，本章重点转向新增的 `load_skill` 工具。启动时把技能（skill）目录注入 SYSTEM prompt，运行时多注册一个工具加载完整内容，用到才花 token。
 
 两层设计：
 
