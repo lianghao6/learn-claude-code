@@ -6,6 +6,10 @@
 
 **Agency -- 感知、推理、行动的能力 -- 来自模型训练，不是来自外部代码的编排。** 但一个能干活的 agent 产品，需要模型和 harness 缺一不可。模型是驾驶者，harness 是载具。本仓库教你造载具。
 
+它强调的是 “能力内生于模型训练过程”，而不是通过外部代码（如硬编码的规则、显式的逻辑判断、外部编排引擎）来“指挥”模型的行为。
+模型在训练过程中学会了：何时感知环境（例如调用工具、解析输入），如何推理（多步思考、决策规划），以及如何行动（生成输出、调用API、执行动作）。
+这种agency使得模型可以像一位有经验的“驾驶者”，自主地处理复杂任务，而不是被外部代码像牵线木偶一样一五一十地操控。
+
 ### Agency 从哪来
 
 Agent 的核心是一个神经网络 -- Transformer、RNN、一个被训练出来的函数 -- 经过数十亿次梯度更新，在行动序列数据上学会了感知环境、推理目标、采取行动。Agency 这个东西从来不是外面那层代码赋予的，而是模型在训练中学到的。
@@ -66,7 +70,7 @@ Harness = Tools + Knowledge + Observation + Action Interfaces + Permissions
 
 ### Harness 工程师到底在做什么
 
-如果你在读这个仓库，你很可能是一名 harness 工程师 -- 这是一个强大的身份。以下是你真正的工作：
+harness 工程师 -- 这是一个强大的身份。以下是你真正的工作：
 
 - **实现工具。** 给 agent 一双手。文件读写、Shell 执行、API 调用、浏览器控制、数据库查询。每个工具都是 agent 在环境中可以采取的一个行动。设计它们时要原子化、可组合、描述清晰。
 
@@ -231,128 +235,8 @@ def agent_loop(messages):
 
 每个课程在这个循环之上叠加一个 harness 机制 -- 循环本身始终不变。循环属于 agent。机制属于 harness。
 
-## 版本说明
 
-本仓库现在同时保留两条教程线：
-
-- **新版主线：根目录 `s01-s20`**
-  根目录下的 `s01_*` 到 `s20_*` 是新的主版本，也是当前推荐阅读路径。每章包含完整叙事 README、可运行的 `code.py`，以及必要的图示。
-- **旧版过渡：`docs/`、`agents/`、当前 `web/`**
-  这些仍保留旧 12 章体系，暂时用于已有读者、旧链接和 Web 平台过渡。
-
-新读者请从根目录 `s01_agent_loop/` 读到 `s20_comprehensive/`。如果你是从旧链接或当前 Web 平台进入，大概率看到的是旧 12 章版本。旧版章节号和新版不完全一致，不要混用章节号。
-
-### 旧版到新版的对应关系
-
-| 旧 12 章版本 | 新 20 章版本 | 主题 |
-|---|---|---|
-| 旧 s01 | 新 s01 | Agent Loop |
-| 旧 s02 | 新 s02 | Tool Use |
-| 旧 s03 | 新 s05 | TodoWrite |
-| 旧 s04 | 新 s06 | Subagent |
-| 旧 s05 | 新 s07 | Skill Loading |
-| 旧 s06 | 新 s08 | Context Compact |
-| 旧 s07 | 新 s12 | Task System |
-| 旧 s08 | 新 s13 | Background Tasks |
-| 旧 s09 | 新 s15 | Agent Teams |
-| 旧 s10 | 新 s16 | Team Protocols |
-| 旧 s11 | 新 s17 | Autonomous Agents |
-| 旧 s12 | 新 s18 | Worktree Isolation |
-| 新版新增 | s03、s04、s09、s10、s11、s14、s19、s20 | Permission、Hooks、Memory、System Prompt、Error Recovery、Cron、MCP、Comprehensive Agent |
-
-## 范围说明 (重要)
-
-本仓库是一个 0->1 的 harness 工程学习项目 -- 构建围绕 agent 模型的工作环境。
-为保证学习路径清晰，仓库有意简化或省略了部分生产机制：
-
-- 完整事件 / Hook 总线 (例如 PreToolUse、SessionStart/End、ConfigChange)。
-  s12 仅提供教学用途的最小 append-only 生命周期事件流。
-- 基于规则的权限治理与信任流程
-- 会话生命周期控制 (resume/fork) 与更完整的 worktree 生命周期控制
-- 完整 MCP 运行时细节 (transport/OAuth/资源订阅/轮询)
-
-仓库中的团队 JSONL 邮箱协议是教学实现，不是对任何特定生产内部实现的声明。
-
-## 快速开始
-
-### 新版 20 章主线
-
-```sh
-git clone https://github.com/shareAI-lab/learn-claude-code
-cd learn-claude-code
-pip install -r requirements.txt
-cp .env.example .env   # 编辑 .env 填入你的 ANTHROPIC_API_KEY
-
-python s01_agent_loop/code.py        # 起点 — 一个循环 + bash
-python s08_context_compact/code.py    # 上下文压缩（复杂章）
-python s20_comprehensive/code.py      # 终点章: 全部机制归到一个循环
-```
-
-### 旧版 12 章过渡线
-
-```sh
-python agents/s01_agent_loop.py
-python agents/s12_worktree_task_isolation.py
-python agents/s_full.py
-```
-
-### Web 平台
-
-当前 Web 平台仍读取 `docs/` 中的旧 12 章内容。新版 20 章请直接阅读根目录 `s01-s20`。
-
-```sh
-cd web && npm install && npm run dev   # http://localhost:3000
-```
-
-## 学习路径
-
-主线：能动手 → 能做复杂任务 → 能记住和恢复 → 能长期运行 → 能协作 → 能扩展并合体
-
-```mermaid
-flowchart TD
-    %% 统一定义卡片样式：加入 text-align:left 保证列表不会居中乱飘
-    classDef stage1 fill:#E3F2FD,stroke:#1976D2,stroke-width:2px,color:#0D47A1,rx:12,ry:12,text-align:left
-    classDef stage2 fill:#E8F5E9,stroke:#388E3C,stroke-width:2px,color:#1B5E20,rx:12,ry:12,text-align:left
-    classDef stage3 fill:#FFF3E0,stroke:#F57C00,stroke-width:2px,color:#E65100,rx:12,ry:12,text-align:left
-    classDef stage4 fill:#FCE4EC,stroke:#C2185b,stroke-width:2px,color:#880E4F,rx:12,ry:12,text-align:left
-    classDef stage5 fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#4A148C,rx:12,ry:12,text-align:left
-    classDef stage6 fill:#E0F7FA,stroke:#0097A7,stroke-width:2px,color:#006064,rx:12,ry:12,text-align:left
-    
-    %% 背景框样式
-    classDef groupBox fill:#F8F9FA,stroke:#CED4DA,stroke-width:2px,stroke-dasharray: 5 5,rx:15,ry:15,color:#495057
-    
-    %% 第一层：1-3阶段
-    subgraph Phase1 ["🌱 阶段 1-3：基础能力构建（从简单到复杂）"]
-        direction LR
-        S1["<b>第一阶段：让 Agent 能动手</b><br/>━━━━━━━━━━━━━<br/><b>s01 Agent Loop</b><br/>└─ 一个循环 + bash<br/><br/><b>s02 Tool Use</b><br/>└─ 单个到多个工具<br/><br/><b>s03 Permission</b><br/>└─ 判断能不能做<br/><br/><b>s04 Hooks</b><br/>└─ 工具前后留扩展插口"]:::stage1
-
-        S2["<b>第二阶段：做复杂任务</b><br/>━━━━━━━━━━━━━<br/><b>s05 TodoWrite</b><br/>└─ 先列计划，再执行<br/><br/><b>s06 Subagent</b><br/>└─ 子节点干活带回结果<br/><br/><b>s08 Context Compact</b><br/>└─ 长下文腾空间"]:::stage2
-
-        S3["<b>第三阶段：记住和恢复</b><br/>━━━━━━━━━━━━━<br/><b>s09 Memory</b><br/>└─ 该记记，该忘忘<br/><br/><b>s10 System Prompt</b><br/>└─ 运行时组装<br/><br/><b>s11 Error Recovery</b><br/>└─ 重试换路子"]:::stage3
-
-        S1 ==> S2 ==> S3
-    end
-
-    %% 第二层：4-6阶段
-    subgraph Phase2 ["🚀 阶段 4-6：高阶能力进化（长期、协作与融合）"]
-        direction LR
-        S4["<b>第四阶段：让任务长期运行</b><br/>━━━━━━━━━━━━━<br/><b>s12 Task System</b><br/>└─ 任务落盘记依赖<br/><br/><b>s13 Background Tasks</b><br/>└─ 慢操作丢后台<br/><br/><b>s14 Cron Scheduler</b><br/>└─ 按时自动触发"]:::stage4
-
-        S5["<b>第五阶段：让多个 Agent 协作</b><br/>━━━━━━━━━━━━━<br/><b>s15 Agent Teams</b><br/>└─ 队友 + 邮箱通信<br/><br/><b>s16 Team Protocols</b><br/>└─ 固定收发格式<br/><br/><b>s17 Autonomous Agents</b><br/>└─ 自己看板认领活<br/><br/><b>s18 Worktree Isolation</b><br/>└─ 隔离目录"]:::stage5
-
-        S6["<b>第六阶段：接外部能力合体</b><br/>━━━━━━━━━━━━━<br/><b>s07 Skill Loading</b><br/>└─ 技能按需展开<br/><br/><b>s19 MCP Plugin</b><br/>└─ 外部接进工具池<br/><br/><b>s20 Comprehensive Agent</b><br/>└─ 全机制回单循环"]:::stage6
-
-        S4 ==> S5 ==> S6
-    end
-
-    %% 将两个模块连接起来，形成 Z 字形阅读流
-    Phase1 ===> Phase2
-
-    %% 应用背景样式
-    class Phase1,Phase2 groupBox
-```
-
-## 全部章节
+## 全部小节
 
 | 章节 | 主题 | 关键概念 |
 |---|---|---|
@@ -377,72 +261,6 @@ flowchart TD
 | [s19](./s19_mcp_plugin/) | MCP Plugin | 多传输 / 通道路由 / 工具池组装 |
 | [s20](./s20_comprehensive/) | Comprehensive Agent | 全部机制归到一个循环 |
 
-## 项目结构
-
-```
-learn-claude-code/
-  s01_agent_loop/          # 每章一个文件夹
-    README.md              #   中文文档（完整叙事）
-    code.py                #   独立可运行代码
-    images/                #   SVG 流程图
-  s02_tool_use/
-  ...
-  s19_mcp_plugin/
-  s20_comprehensive/       # 终点章
-  agents/                  # 旧 12 章可运行副本 + s_full.py
-  skills/                  # s07 使用的 skill 文件
-  docs/                    # 旧 12 章文档，过渡期保留
-  web/                     # 当前仍基于 docs/ 旧版内容生成
-  tests/
-```
-
-## 学完之后 -- 从理解到落地
-
-20 个课程走完, 你已经从内到外理解了 harness 工程的运作原理。两种方式把知识变成产品:
-
-### Kode Agent CLI -- 开源 Coding Agent CLI
-
-> `npm i -g @shareai-lab/kode`
-
-支持 Skill & LSP, 适配 Windows, 可接 GLM / MiniMax / DeepSeek 等开放模型。装完即用。
-
-GitHub: **[shareAI-lab/Kode-cli](https://github.com/shareAI-lab/Kode-cli)**
-
-### Kode Agent SDK -- 把 Agent 能力嵌入你的应用
-
-官方 Claude Code Agent SDK 底层与完整 CLI 进程通信 -- 每个并发用户 = 一个终端进程。Kode SDK 是独立库, 无 per-user 进程开销, 可嵌入后端、浏览器插件、嵌入式设备等任意运行时。
-
-GitHub: **[shareAI-lab/Kode-agent-sdk](https://github.com/shareAI-lab/Kode-agent-sdk)**
-
----
-
-## 姊妹教程: 从*被动临时会话*到*主动常驻助手*
-
-本仓库教的 harness 属于 **用完即走** 型 -- 开终端、给 agent 任务、做完关掉, 下次重开是全新会话。Claude Code 就是这种模式。
-
-但 [OpenClaw](https://github.com/openclaw/openclaw) 证明了另一种可能: 在同样的 agent core 之上, 加两个 harness 机制就能让 agent 从 "踹一下动一下" 变成 "自己隔 30 秒醒一次找活干":
-
-- **心跳 (Heartbeat)** -- 每 30 秒 harness 给 agent 发一条消息, 让它检查有没有事可做。没事就继续睡, 有事立刻行动。
-- **定时任务 (Cron)** -- agent 可以给自己安排未来要做的事, 到点自动执行。
-
-再加上 IM 多通道路由 (WhatsApp/Telegram/Slack/Discord 等 13+ 平台)、不清空的上下文记忆、Soul 人格系统, agent 就从一个临时工具变成了始终在线的个人 AI 助手。
-
-**[claw0](https://github.com/shareAI-lab/claw0)** 是我们的姊妹教学仓库, 从零拆解这些 harness 机制:
-
-```
-claw agent = agent core + heartbeat + cron + IM chat + memory + soul
-```
-
-```
-learn-claude-code                   claw0
-(agent harness 内核:                 (主动式常驻 harness:
- 循环、工具、规划、                    心跳、定时任务、IM 通道、
- 团队、worktree 隔离)                  记忆、Soul 人格)
-```
-
-## 许可证
-
-MIT
 
 ---
 

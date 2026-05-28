@@ -23,8 +23,8 @@ until the model decides to stop. Production agents layer
 policy, hooks, and lifecycle controls on top.
 
 Usage:
-    pip install anthropic python-dotenv
-    ANTHROPIC_API_KEY=... python s01_agent_loop/code.py
+    pip install anthropic
+    python s01_agent_loop/code.py
 """
 
 import os
@@ -41,15 +41,12 @@ except ImportError:
     pass
 
 from anthropic import Anthropic
-from dotenv import load_dotenv
 
-load_dotenv(override=True)
 
-if os.getenv("ANTHROPIC_BASE_URL"):
-    os.environ.pop("ANTHROPIC_AUTH_TOKEN", None)
-
-client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
-MODEL = os.environ["MODEL_ID"]
+client = Anthropic(
+    api_key="***",
+    base_url="https://api-inference.modelscope.cn")
+MODEL = "Qwen/Qwen3.5-35B-A3B"
 
 SYSTEM = f"You are a coding agent at {os.getcwd()}. Use bash to solve tasks. Act, don't explain."
 
