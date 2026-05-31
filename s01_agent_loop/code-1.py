@@ -44,7 +44,7 @@ from anthropic import Anthropic
 
 
 client = Anthropic(
-    api_key="***",
+    api_key="**",
     base_url="https://api-inference.modelscope.cn")
 MODEL = "Qwen/Qwen3.5-35B-A3B"
 
